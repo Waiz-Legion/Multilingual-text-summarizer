@@ -1,5 +1,5 @@
 # Multilingual Text Summarizer
-
+Access it [here](https://waiz-legion-multilingual-text-summarizer-app-xpv02b.streamlit.app/)
 This project aims to translate texts from multiple languages in english and return the summary. Currently it supports 8 languages-  
 `en`, `hi`,`ar`,`zh`, `es`, `fr`, `ja`,`ru`.
 
