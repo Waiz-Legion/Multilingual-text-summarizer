@@ -3,9 +3,9 @@ from transformers import MarianMTModel, MarianTokenizer, pipeline
 import torch
 import langdetect
 import sentencepiece
-st.title("Multilingual News Summarizer")
+st.title("Multilingual Text Summarizer")
 
-#@st.cache(suppress_st_warning = True)
+@st.cache(suppress_st_warning = True)
 def multilingual_summarizer(news):
     global res
     li = ['en', 'hi', 'ru', 'zh', 'fr', 'ja', 'ar', 'es']
