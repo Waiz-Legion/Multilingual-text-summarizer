@@ -5,80 +5,85 @@ import langdetect
 import sentencepiece
 st.title("Multilingual News Summarizer")
 
-@st.cache(suppress_st_warning = True)
+#@st.cache(suppress_st_warning = True)
 def multilingual_summarizer(news):
     global res
+    li = ['en', 'hi', 'ru', 'zh', 'fr', 'ja', 'ar', 'es']
     lang = langdetect.detect(news)
-    model = 'pszemraj/long-t5-tglobal-base-16384-book-summary'
-    pipe = pipeline('summarization', model = model, device = 0 if torch.cuda.is_available() else -1)
-    if lang == 'en':
-        res = pipe(news)[0]['summary_text']
-        print(res)
-    if lang == 'hi':
-        model_name = f'Helsinki-NLP/opus-mt-{lang}-en'
-        model = MarianMTModel.from_pretrained(model_name)
-        tokenizer = MarianTokenizer.from_pretrained(model_name)
-        batch = tokenizer([news], return_tensors = 'pt')
-        ids = model.generate(**batch)
-        text = tokenizer.batch_decode(ids, skip_special_tokens = True)[0]
-        res = pipe(text)[0]['summary_text']
-        print(res)
-    elif lang =='ar':
-        model_name = f'Helsinki-NLP/opus-mt-{lang}-en'
-        model = MarianMTModel.from_pretrained(model_name)
-        tokenizer = MarianTokenizer.from_pretrained(model_name)
-        batch = tokenizer([news], return_tensors = 'pt')
-        ids = model.generate(**batch)
-        text = tokenizer.batch_decode(ids, skip_special_tokens = True)[0]
-        res = pipe(text)[0]['summary_text']
-        print(res)
-    elif lang == 'zh':
-        model_name = f'Helsinki-NLP/opus-mt-{lang}-en'
-        model = MarianMTModel.from_pretrained(model_name)
-        tokenizer = MarianTokenizer.from_pretrained(model_name)
-        batch = tokenizer([news], return_tensors = 'pt')
-        ids = model.generate(**batch)
-        text = tokenizer.batch_decode(ids, skip_special_tokens = True)[0]
-        res = pipe(text)[0]['summary_text']
-        print(res)
-    elif lang == 'ja':
-        model_name = f'Helsinki-NLP/opus-mt-{lang}-en'
-        model = MarianMTModel.from_pretrained(model_name)
-        tokenizer = MarianTokenizer.from_pretrained(model_name)
-        batch = tokenizer([news], return_tensors = 'pt')
-        ids = model.generate(**batch)
-        text = tokenizer.batch_decode(ids, skip_special_tokens = True)[0]
-        res = pipe(text)[0]['summary_text']
-        print(res)
-    elif lang == 'es':
-        model_name = f'Helsinki-NLP/opus-mt-{lang}-en'
-        model = MarianMTModel.from_pretrained(model_name)
-        tokenizer = MarianTokenizer.from_pretrained(model_name)
-        batch = tokenizer([news], return_tensors = 'pt')
-        ids = model.generate(**batch)
-        text = tokenizer.batch_decode(ids, skip_special_tokens = True)[0]
-        res = pipe(text)[0]['summary_text']
-        print(res)
-    elif lang == 'ru':
-        model_name = f'Helsinki-NLP/opus-mt-{lang}-en'
-        model = MarianMTModel.from_pretrained(model_name)
-        tokenizer = MarianTokenizer.from_pretrained(model_name)
-        batch = tokenizer([news], return_tensors = 'pt')
-        ids = model.generate(**batch)
+    if lang in li:
+
+        model = 'pszemraj/long-t5-tglobal-base-16384-book-summary'
+        pipe = pipeline('summarization', model = model, device = 0 if torch.cuda.is_available() else -1)
+        if lang == 'en':
+            res = pipe(news)[0]['summary_text']
+            print(res)
+        if lang == 'hi':
+            model_name = f'Helsinki-NLP/opus-mt-{lang}-en'
+            model = MarianMTModel.from_pretrained(model_name)
+            tokenizer = MarianTokenizer.from_pretrained(model_name)
+            batch = tokenizer([news], return_tensors = 'pt')
+            ids = model.generate(**batch)
+            text = tokenizer.batch_decode(ids, skip_special_tokens = True)[0]
+            res = pipe(text)[0]['summary_text']
+            print(res)
+        elif lang =='ar':
+            model_name = f'Helsinki-NLP/opus-mt-{lang}-en'
+            model = MarianMTModel.from_pretrained(model_name)
+            tokenizer = MarianTokenizer.from_pretrained(model_name)
+            batch = tokenizer([news], return_tensors = 'pt')
+            ids = model.generate(**batch)
+            text = tokenizer.batch_decode(ids, skip_special_tokens = True)[0]
+            res = pipe(text)[0]['summary_text']
+            print(res)
+        elif lang == 'zh':
+            model_name = f'Helsinki-NLP/opus-mt-{lang}-en'
+            model = MarianMTModel.from_pretrained(model_name)
+            tokenizer = MarianTokenizer.from_pretrained(model_name)
+            batch = tokenizer([news], return_tensors = 'pt')
+            ids = model.generate(**batch)
+            text = tokenizer.batch_decode(ids, skip_special_tokens = True)[0]
+            res = pipe(text)[0]['summary_text']
+            print(res)
+        elif lang == 'ja':
+            model_name = f'Helsinki-NLP/opus-mt-{lang}-en'
+            model = MarianMTModel.from_pretrained(model_name)
+            tokenizer = MarianTokenizer.from_pretrained(model_name)
+            batch = tokenizer([news], return_tensors = 'pt')
+            ids = model.generate(**batch)
+            text = tokenizer.batch_decode(ids, skip_special_tokens = True)[0]
+            res = pipe(text)[0]['summary_text']
+            print(res)
+        elif lang == 'es':
+            model_name = f'Helsinki-NLP/opus-mt-{lang}-en'
+            model = MarianMTModel.from_pretrained(model_name)
+            tokenizer = MarianTokenizer.from_pretrained(model_name)
+            batch = tokenizer([news], return_tensors = 'pt')
+            ids = model.generate(**batch)
+            text = tokenizer.batch_decode(ids, skip_special_tokens = True)[0]
+            res = pipe(text)[0]['summary_text']
+            print(res)
+        elif lang == 'ru':
+            model_name = f'Helsinki-NLP/opus-mt-{lang}-en'
+            model = MarianMTModel.from_pretrained(model_name)
+            tokenizer = MarianTokenizer.from_pretrained(model_name)
+            batch = tokenizer([news], return_tensors = 'pt')
+            ids = model.generate(**batch)
+            
+            text = tokenizer.batch_decode(ids, skip_special_tokens = True)[0]
+            res = pipe(text)[0]['summary_text']
+            print(res)
+        elif lang == 'fr':
+            model_name = f'Helsinki-NLP/opus-mt-{lang}-en'
+            model = MarianMTModel.from_pretrained(model_name)
+            tokenizer = MarianTokenizer.from_pretrained(model_name)
+            batch = tokenizer([news], return_tensors = 'pt')
+            ids = model.generate(**batch)
+            text = tokenizer.batch_decode(ids, skip_special_tokens = True)[0]
+            res = pipe(text)[0]['summary_text']
+            print(res)
         
-        text = tokenizer.batch_decode(ids, skip_special_tokens = True)[0]
-        res = pipe(text)[0]['summary_text']
-        print(res)
-    elif lang == 'fr':
-        model_name = f'Helsinki-NLP/opus-mt-{lang}-en'
-        model = MarianMTModel.from_pretrained(model_name)
-        tokenizer = MarianTokenizer.from_pretrained(model_name)
-        batch = tokenizer([news], return_tensors = 'pt')
-        ids = model.generate(**batch)
-        text = tokenizer.batch_decode(ids, skip_special_tokens = True)[0]
-        res = pipe(text)[0]['summary_text']
-        print(res)
-    return res, lang
+        return res
+    else: return st.warning("Only 'en', 'hi', 'ru', 'zh', 'fr', 'ja', 'ar', 'es' languages are supported!!!")
 
 
 
@@ -88,6 +93,6 @@ news = st.text_area(label = 'Enter text to summarize: ', value="", height=300, m
 
 
 if st.button(label = 'Translate and Summarize'):
-    result, lang = multilingual_summarizer(news)
+    result = multilingual_summarizer(news)
     st.success(result)
     #st.success(lang)
